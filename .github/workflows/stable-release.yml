@@ -35,10 +35,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew scripts/run_build.sh
+        run: chmod +x ./gradlew
 
-      - name: Build with Gradle Wrapper Script
-        run: ./scripts/run_build.sh --no-configuration-cache
+      - name: Build with Gradle
+        run: ./gradlew build --no-configuration-cache
 
       - name: Prepare release metadata
         id: meta
