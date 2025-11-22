@@ -30,9 +30,19 @@ jobs:
       - name: Determine release metadata
         id: meta
         run: |
+          # Extract version from gradle/libs.versions.toml
+          VERSION=$(grep '^mod-version = ' gradle/libs.versions.toml | sed 's/mod-version = "\(.*\)"/\1/')
+
+          # Generate UTC timestamp in YYYYMMDD-HHMMSS format
+          TIMESTAMP=$(date -u +"%Y%m%d-%H%M%S")
+
+          # Build versioned tag and release name
+          TAG_NAME="v${VERSION}-dev.${TIMESTAMP}"
+          RELEASE_NAME="Dev Build (${TIMESTAMP})"
+
           {
-            echo "tag_name=snapshot"
-            echo "release_name=Dev Build"
+            echo "tag_name=${TAG_NAME}"
+            echo "release_name=${RELEASE_NAME}"
             echo "prerelease=true"
           } >> "$GITHUB_OUTPUT"
 
