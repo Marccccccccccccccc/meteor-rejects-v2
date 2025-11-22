@@ -174,11 +174,8 @@ This continuation is yet not fully tested, and not associated with the original 
 
 ### Build Instructions
 
-Use Gradle to build:
-```bash
-./gradlew build
-```
-
+Use Gradle to build: `./gradlew build`
+<br>
 Output JAR: `build/libs/meteor-rejects-addon-<version>.jar`
 
 <hr />
