@@ -20,7 +20,13 @@
       "Bash(del \"C:\\Users\\Cope\\Documents\\GitHub\\meteor-rejects-1.21.10\\src\\main\\java\\anticope\\rejects\\mixin\\LivingEntityRendererAccessor.java\" \"C:\\Users\\Cope\\Documents\\GitHub\\meteor-rejects-1.21.10\\src\\main\\java\\anticope\\rejects\\mixin\\ModelPartAccessor.java\")",
       "Bash(dir /s /b C:UsersCopeDocumentsGitHubmeteor-rejects-v2srcmainjavaanticope 2)",
       "Bash(python refresh_references.py:*)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__linkie-mcp-server__search_mappings",
+      "mcp__mixin-mcp-server__search_class",
+      "Bash(./gradlew dependencies:*)",
+      "mcp__mixin-mcp-server__add_jar_path",
+      "mcp__mixin-mcp-server__load_class",
+      "mcp__linkie-mcp-server__lookup_class"
     ],
     "deny": [],
     "ask": []
