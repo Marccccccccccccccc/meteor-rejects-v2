@@ -7,6 +7,13 @@
 
 An **unofficial, experimental port** of the original [Meteor Rejects](https://github.com/AntiCope/meteor-rejects) addon
 
+  <p>
+    <img src="https://img.shields.io/badge/Meteor_Client-Latest-8a11b6?style=flat" alt="Meteor Client">    
+    <img src="https://img.shields.io/badge/Minecraft-1.21.10-00800f?style=flat" alt="Minecraft">
+    <img src="https://img.shields.io/badge/Fabric-0.17.3-3d5dff?style=flat" alt="Fabric">
+    <img src="https://img.shields.io/badge/Java-21-e28655?style=flat" alt="Java">
+  </p>
+
 <p>
 This continuation is yet not fully tested, and not associated with the original developers.
 </p>
