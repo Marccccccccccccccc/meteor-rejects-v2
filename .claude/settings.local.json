@@ -26,7 +26,12 @@
       "Bash(./gradlew dependencies:*)",
       "mcp__mixin-mcp-server__add_jar_path",
       "mcp__mixin-mcp-server__load_class",
-      "mcp__linkie-mcp-server__lookup_class"
+      "mcp__linkie-mcp-server__lookup_class",
+      "mcp__gradle-mcp-server__gradle_version",
+      "Skill(minecraft-fabric-dev)",
+      "mcp__gradle-mcp-server__gradle_build",
+      "mcp__minecraft-dev__get_minecraft_source",
+      "mcp__minecraft-dev__search_minecraft_code"
     ],
     "deny": [],
     "ask": []

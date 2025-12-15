@@ -64,7 +64,7 @@ public class ServerListPinger {
         if (address.isEmpty()) {
             return;
         }
-        final ClientConnection clientConnection = ClientConnection.connect(address.get(), false, (MultiValueDebugSampleLogImpl) null);
+        final ClientConnection clientConnection = ClientConnection.connect(address.get(), net.minecraft.network.NetworkingBackend.remote(false), (MultiValueDebugSampleLogImpl) null);
 
         failedToConnect = false;
         this.clientConnections.add(clientConnection);
@@ -144,7 +144,7 @@ public class ServerListPinger {
 
     private void ping(final MServerInfo serverInfo) {
         final ServerAddress serverAddress = ServerAddress.parse(serverInfo.address);
-        new Bootstrap().group(ClientConnection.CLIENT_IO_GROUP.get()).handler(new ChannelInitializer<>() {
+        new Bootstrap().group(net.minecraft.network.NetworkingBackend.remote(false).getEventLoopGroup()).handler(new ChannelInitializer<>() {
             @Override
             protected void initChannel(Channel ch) throws Exception {
                 try {

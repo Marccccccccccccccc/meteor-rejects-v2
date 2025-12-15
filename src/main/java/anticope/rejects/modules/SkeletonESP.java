@@ -139,7 +139,7 @@ public class SkeletonESP extends Module {
 
     private Color getColorFromDistance(AbstractClientPlayerEntity player) {
         Vec3d playerPos = new Vec3d(player.getX(), player.getY(), player.getZ());
-        double distance = mc.gameRenderer.getCamera().getPos().distanceTo(playerPos);
+        double distance = mc.gameRenderer.getCamera().getCameraPos().distanceTo(playerPos);
         double percent = Math.min(1.0, distance / 60.0);
 
         int r, g;
