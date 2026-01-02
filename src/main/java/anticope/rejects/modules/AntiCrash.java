@@ -7,6 +7,8 @@ import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
+import net.minecraft.network.packet.s2c.play.EntitiesDestroyS2CPacket;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
@@ -96,6 +98,21 @@ public class AntiCrash extends Module {
             if (velocity.getX() > 30_000_000 || velocity.getY() > 30_000_000 || velocity.getZ() > 30_000_000 ||
                 velocity.getX() < -30_000_000 || velocity.getY() < -30_000_000 || velocity.getZ() < -30_000_000) {
                 cancel(event, "velocity outside world border");
+            }
+        } else if (event.packet instanceof EntitiesDestroyS2CPacket packet) {
+            //DestroySelf Fix
+            if (mc.player != null) {
+                int playerId = mc.player.getId();
+                for (int entityId : packet.getEntityIds().toIntArray()) {
+                    if (entityId == playerId) {
+                        cancel(event, "attempted to destroy player entity (DestroySelf exploit)");
+                        return;
+                    }
+                }
+            }
+        } else if (event.packet instanceof EntitySpawnS2CPacket packet) {
+            if (mc.player != null && packet.getEntityId() == mc.player.getId()) {
+                cancel(event, "attempted to spawn entity with player ID (DestroySelf exploit)");
             }
         }
     }
