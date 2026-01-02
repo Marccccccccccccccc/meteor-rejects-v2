@@ -11,6 +11,7 @@ import net.minecraft.network.packet.s2c.play.EntitiesDestroyS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
+import net.minecraft.network.packet.s2c.play.HealthUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.util.math.Vec3d;
@@ -113,6 +114,36 @@ public class AntiCrash extends Module {
         } else if (event.packet instanceof EntitySpawnS2CPacket packet) {
             if (mc.player != null && packet.getEntityId() == mc.player.getId()) {
                 cancel(event, "attempted to spawn entity with player ID (DestroySelf exploit)");
+            }
+        } else if (event.packet instanceof HealthUpdateS2CPacket packet) {
+            //IllegalHealthUpdate Fix
+            float health = packet.getHealth();
+            int food = packet.getFood();
+            float saturation = packet.getSaturation();
+
+            if (Float.isNaN(health) || Float.isInfinite(health)) {
+                cancel(event, "illegal health value (NaN/Infinite)");
+                return;
+            }
+
+            if (Float.isNaN(saturation) || Float.isInfinite(saturation)) {
+                cancel(event, "illegal saturation value (NaN/Infinite)");
+                return;
+            }
+
+            if (health < 0) {
+                cancel(event, "negative health (" + health + ")");
+                return;
+            }
+
+            if (food < 0) {
+                cancel(event, "negative food (" + food + ")");
+                return;
+            }
+
+            if (saturation < 0) {
+                cancel(event, "negative saturation (" + saturation + ")");
+                return;
             }
         }
     }
