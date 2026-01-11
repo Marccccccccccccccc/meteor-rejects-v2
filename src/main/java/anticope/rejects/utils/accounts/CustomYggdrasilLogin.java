@@ -55,13 +55,14 @@ public class CustomYggdrasilLogin {
         }
     }
 
+
     public static class LocalYggdrasilMinecraftSessionService extends YggdrasilMinecraftSessionService {
         private static final Logger LOGGER = LogManager.getLogger();
         private final ServicesKeyInfo publicKey;
         private final Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
 
-        public LocalYggdrasilMinecraftSessionService(YggdrasilAuthenticationService service, String serverUrl) {
-            super(service.getServicesKeySet(), mc.getNetworkProxy(), localYggdrasilApi);
+        public LocalYggdrasilMinecraftSessionService(YggdrasilAuthenticationService service, String serverUrl, Environment env) {
+            super(service.getServicesKeySet(), mc.getNetworkProxy(), env);
             String data = Http.get(serverUrl).sendString();
             JsonObject json = JsonParser.parseString(data).getAsJsonObject();
             this.publicKey = getPublicKey(json.get("signaturePublickey").getAsString());
@@ -121,7 +122,7 @@ public class CustomYggdrasilLogin {
         public final String server;
 
         public LocalYggdrasilAuthenticationService(Proxy proxy, String server) {
-            super(proxy, localYggdrasilApi);
+            super(proxy, new Environment(server, server, "https://api.mojang.com", "Custom-Yggdrasil"));
             this.server = server;
         }
     }
